@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Login Page</title>
+
+    <!-- Login picture -->
+    <link rel="stylesheet" href="fonts/icomoon/style.css" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <!-- Other CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="stylesheet" href="loginstyles.css" />
+
+    <!-- <link
+      rel="stylesheet"
+      href="https://twilio-labs.github.io/function-templates/static/v1/ce-paste-theme.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/css/intlTelInput.min.css"
+      integrity="sha256-xpVuhxDPR39wFEQDha4W7kuMx+z9Av3dTS8MbH/RWEU="
+      crossorigin="anonymous"
+    />
+
+    <!-- Fonts and additional icons -->
+    <script
+      src="https://kit.fontawesome.com/ac728cac95.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/intlTelInput.min.js"
+      integrity="sha256-uPbemOnf3P4eaeLHebLwPC71YRbu3WNBvO4ibYeBnGs="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Cookie functions scr -->
+    <script src="http://www.onezeus.com:905/STEMKASAInstructorUI/dist/assets/js/stemkasa_common.js"></script>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=2318987501584608&autoLogAppEvents=1"
+      nonce="CuOXs8hB"
+    ></script>
+
+    <!-- Before modal -->
+    <div class="content">
+      <div class="container">
+        <div class="row" id="main-content-container">
+          <div class="col-md-6" id="imgcontainer">
+            <img
+              src="images/undraw_remotely_2j6y.svg"
+              alt="Image"
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-6 contents">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="mb-4">
+                  <h3>Sign In</h3>
+                  <p class="mb-4"></p>
+                </div>
+                <form action="#" method="post">
+                  <div class="form-group first">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="username"
+                      required
+                    />
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label for="password">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      required
+                    />
+                  </div>
+
+                  <div class="d-flex mb-5 align-items-center">
+                    <label class="control control--checkbox mb-0"
+                      ><span class="caption">Remember me</span>
+                      <input type="checkbox" checked="checked" />
+                      <div class="control__indicator"></div>
+                    </label>
+
+                    <span class="ms-auto"
+                      ><a href="#" class="forgot-pass">Forgot Password</a></span
+                    >
+                  </div>
+
+                  <input
+                    type="submit"
+                    value="Log In"
+                    class="btn btn-block btn-primary"
+                    id="loginbutton"
+                  />
+
+                  <span class="d-block text-left my-4 text-muted"
+                    >&mdash; or login with &mdash;</span
+                  >
+
+                  <div class="social-login">
+                    <!-- <a href="#" class="facebook">
+                      <span class="icon-facebook mr-3"></span>
+                    </a>
+                    <a href="#" class="twitter">
+                      <span class="icon-twitter mr-3"></span>
+                    </a>
+                    <a href="#" class="google">
+                      <span class="icon-google mr-3"></span>
+                    </a> -->
+                    <div
+                      class="fb-login-button"
+                      data-width=""
+                      data-size="large"
+                      data-button-type="continue_with"
+                      data-layout="default"
+                      data-auto-logout-link="false"
+                      data-use-continue-as="false"
+                    ></div>
+
+                    <button class="tiktokbutton">Continue With TikTok</button>
+                  </div>
+
+                  <!-- Registration Modal -->
+                  <div class="container">
+                    <p class="text-center">
+                      <a href="signup.html" id="clickheretoregister"
+                        >Dont Have an Account? Click Here to Register</a
+                      >
+                    </p>
+                    <div class="modal modal1" id="myModal">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div
+                          class="modal-content modalcontainer"
+                          id="firstcontainer"
+                        >
+                          <div id="closebtncontainer">
+                            <a data-bs-dismiss="modal" id="modalclose"
+                              ><i class="fa-solid fa-circle-xmark fa-3x"></i
+                            ></a>
+                          </div>
+
+                          <div class="modal-header">
+                            <h3 class="text-center" id="modaltitle">Sign Up</h3>
+                          </div>
+                          <div id="std-teach-admin-btns">
+                            <button id="studentbtn">Student</button>
+                            <button id="teacherbtn">Teacher</button>
+                            <button id="adminbtn">Admin</button>
+                          </div>
+
+                          <div
+                            class="modal1cont"
+                            id="registrationmodalcontainer"
+                          >
+                            <div class="modal-body" id="modalBody">
+                              <form class="needs-validation">
+                                <div class="mb-3 form-floating">
+                                  <i class="fa-solid fa-user fa-lg icon"></i>
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floatingname"
+                                    placeholder="Name"
+                                    required
+                                  />
+                                  <label class="required" for="floatingname"
+                                    >Name</label
+                                  >
+                                </div>
+
+                                <div class="mb-3 form-floating">
+                                  <i
+                                    class="fa-solid fa-envelope fa-lg icon"
+                                  ></i>
+                                  <input
+                                    type="email"
+                                    class="form-control"
+                                    id="floatingemail"
+                                    placeholder="Email"
+                                    required
+                                  />
+                                  <label class="required" form="floatingemail"
+                                    >Email</label
+                                  >
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <i class="fa-solid fa-user fa-lg icon"></i>
+
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floatingusername"
+                                    placeholder="Username"
+                                    required
+                                  />
+                                  <label class="required" for="floatingusername"
+                                    >Username</label
+                                  >
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <i class="fa-solid fa-key fa-lg icon"></i>
+                                  <input
+                                    type="password"
+                                    class="form-control"
+                                    id="floatingpassword"
+                                    placeholder="Password"
+                                    required
+                                  />
+                                  <label
+                                    class="required"
+                                    form="floatingpassword"
+                                    >Password</label
+                                  >
+                                </div>
+                                <div class="mb-3 form-floating">
+                                  <i class="fa-solid fa-phone fa-lg icon"></i>
+                                  <input
+                                    type="tel"
+                                    class="form-control"
+                                    id="floatingphonenumber"
+                                    placeholder="Phone number"
+                                    required
+                                  />
+                                  <label
+                                    class="required"
+                                    for="floatingphonenumber"
+                                    id="phonelabel"
+                                    >Phone number</label
+                                  >
+                                </div>
+                                <!-- <div class="formcheckgroup">
+                                  <h6 class="formdirections">
+                                    Select the Category that best describes your
+                                    position
+                                  </h6>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="flexRadioDefault"
+                                      id="flexRadioDefault1"
+                                      value="Student"
+                                      required
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="flexRadioDefault1"
+                                    >
+                                      Student
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="flexRadioDefault"
+                                      id="flexRadioDefault2"
+                                      value="Teacher"
+                                      
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="flexRadioDefault2"
+                                    >
+                                      Teacher
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="radio"
+                                      name="flexRadioDefault"
+                                      id="flexRadioDefault3"
+                                      value="Administrator"
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="flexRadioDefault3"
+                                    >
+                                      Administrator
+                                    </label>
+                                  </div>
+                                </div> -->
+                                <div id="formselectgroup">
+                                  <h6>Select Your School</h6>
+                                  <select
+                                    class="form-select form-select-sm"
+                                    aria-label=".form-select-sm example"
+                                    id="schoolselection"
+                                    required
+                                  >
+                                    <option selected>None</option>
+                                  </select>
+                                </div>
+                              </form>
+                            </div>
+
+                            <div
+                              class="modal-footer justify-content-center"
+                              id="modalfooter"
+                            >
+                              <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="registerbutton"
+                              >
+                                Register Now!
+                              </button>
+                            </div>
+
+                            <!-- 2nd modal for 2fa -->
+                            <div
+                              class="modal-body secondmodal"
+                              id="secondmodalbody"
+                            >
+                              <main>
+                                <div class="content">
+                                  <section>
+                                    <h2>
+                                      Verify Your Account First With a One-Time
+                                      Password
+                                    </h2>
+                                    <form id="send-code">
+                                      <p>
+                                        Choose how you'd like us to contact you:
+                                      </p>
+                                      <div>
+                                        <input
+                                          type="radio"
+                                          name="channel"
+                                          id="channel-sms"
+                                          value="sms"
+                                          checked
+                                        />
+                                        <label for="channel-sms">SMS</label>
+                                      </div>
+                                      <div>
+                                        <input
+                                          type="radio"
+                                          name="channel"
+                                          id="channel-whatsapp"
+                                          value="whatsapp"
+                                        />
+                                        <label for="channel-whatsapp"
+                                          >WhatsApp</label
+                                        >
+                                      </div>
+                                      <div>
+                                        <input
+                                          type="radio"
+                                          name="channel"
+                                          id="channel-call"
+                                          value="call"
+                                        />
+                                        <label for="channel-call">Call</label>
+                                      </div>
+                                      <div>
+                                        <input
+                                          type="radio"
+                                          name="channel"
+                                          id="channel-email"
+                                          value="email"
+                                        />
+                                        <label for="channel-email">Email</label>
+                                      </div>
+                                      <div id="phone-input">
+                                        <p>Enter your phone number:</p>
+                                        <input type="tel" id="phone_number" />
+                                      </div>
+                                      <div
+                                        id="email-input"
+                                        style="display: none"
+                                      >
+                                        <p>Enter your email:</p>
+                                        <input type="email" id="email" />
+                                      </div>
+                                      <p>Select your preferred language:</p>
+                                      <select id="select-language"></select>
+                                      <input
+                                        type="submit"
+                                        value="Get a one-time passcode"
+                                        id=""
+                                      />
+                                      <span id="status" class="status"></span>
+                                    </form>
+                                  </section>
+                                  <section>
+                                    <div id="otp-modal">
+                                      <div class="modal-content">
+                                        <span id="close">&times;</span>
+                                        <form id="check-code">
+                                          <div>
+                                            <p>Enter the code:</p>
+                                            <input
+                                              type="text"
+                                              id="code"
+                                              placeholder="123456"
+                                              required
+                                            />
+                                          </div>
+                                          <div>
+                                            <input
+                                              type="submit"
+                                              value="Verify code"
+                                            />
+                                          </div>
+                                          <span
+                                            id="modal-status"
+                                            class="status"
+                                          ></span>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </section>
+                                </div>
+                              </main>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script type="module">
+    let userNameInput = document.getElementById("username");
+    let passwordInput = document.getElementById("password");
+    const loginButton = document.getElementById("loginbutton");
+
+    loginButton.addEventListener("click", (e) => {
+      userNameInput = userNameInput.value;
+      passwordInput = passwordInput.value;
+      // e.preventDefault();
+
+      console.log(userNameInput);
+      console.log(passwordInput);
+
+      //check database
+      async function checkVals() {
+        const userURL = "http://www.onezeus.com:3000/users";
+        const resp = await fetch(userURL);
+        const data = await resp.json();
+        console.log(data);
+
+        // Find index of username/email match
+        let matchIndex = data.findIndex((user) => {
+          return user.EMAIL_ADDRESS == userNameInput;
+        });
+
+        console.log(userNameInput);
+        console.log(matchIndex);
+
+        if (matchIndex !== -1) {
+          let matchUserRole = "";
+          console.log(data[matchIndex].USER_ID);
+
+          // Check if admin/teacher/student contained in word
+          if (data[matchIndex].DESCRIPTION.toLowerCase().includes("admin")) {
+            matchUserRole = "Admin";
+          } else if (
+            data[matchIndex].DESCRIPTION.toLowerCase().includes("teach")
+          ) {
+            matchUserRole = "Teacher";
+          } else {
+            matchUserRole = "Student";
+          }
+
+          localStorage.setItem(
+            "login-username",
+            data[matchIndex].EMAIL_ADDRESS
+          );
+          localStorage.setItem("login-id", data[matchIndex].USER_ID);
+          localStorage.setItem("login-role", matchUserRole);
+          window.location.href = "2fa.html";
+        } else {
+          window.location.href = "signup.html";
+        }
+      }
+      checkVals();
+    });
+
+    // // function showCookieBanner(){
+    // // let cookieBanner = document.getElementById("cb-cookie-banner");
+    // // cookieBanner.style.display = "block";
+    // // }
+    // // showCookieBanner()
+
+    // var teacherbutton = document.getElementById("teacherbtn");
+    // var studentbutton = document.getElementById("studentbtn");
+    // var adminbutton = document.getElementById("adminbtn");
+
+    // teacherbutton.addEventListener("click", (e) => {
+    //   adminbutton.style.borderColor = "black";
+    //   studentbutton.style.borderColor = "black";
+    //   teacherbutton.style.borderColor = "orange";
+    // });
+
+    // studentbutton.addEventListener("click", () => {
+    //   teacherbutton.style.borderColor = "black";
+    //   adminbutton.style.borderColor = "black";
+    //   studentbutton.style.borderColor = "orange";
+    // });
+
+    // adminbutton.addEventListener("click", () => {
+    //   teacherbutton.style.borderColor = "black";
+    //   studentbutton.style.borderColor = "black";
+    //   adminbutton.style.borderColor = "orange";
+    // });
+
+    // // **Helper functions**
+
+    // // const deleteAllCookies = () => {
+    // //   const cookies = document.cookie.split(";");
+
+    // //   for (const cookie of cookies) {
+    // //     const eqPos = cookie.indexOf("=");
+    // //     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    // //     document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    // //   }
+    // // }
+
+    // // deleteAllCookies()
+
+    // // localStorage.clear()
+
+    // // **Constants and Variables**
+
+    // const registerNowBtn = document.getElementById("registerbutton");
+    // const loginBtn = document.getElementById("loginbutton");
+    // const personURL = "http://www.onezeus.com:3000/person";
+    // const userURL = "http://www.onezeus.com:3000/users";
+    // const firstmodalcont = document.getElementById(
+    //   "registrationmodalcontainer"
+    // );
+    // const remove1stModal = document.getElementById("modalBody");
+    // const replace1stModalWith = document.getElementById("secondmodalbody");
+    // const footer = document.getElementById("modalfooter");
+    // const closeBtn = document.getElementById("modalclose");
+    // const openRegistrationModal = document.getElementById(
+    //   "clickheretoregister"
+    // );
+    // const schoolAPI = "http://www.onezeus.com:3000/schools";
+    // const selectMenu = document.getElementById("schoolselection");
+    // const option = document.createElement("option");
+
+    // //Boolean if username found in USERS
+    // var foundNotFound = false;
+
+    // // Get matched id and role from match
+    // var matchUserID = 0;
+    // var matchUserRole = "";
+
+    // var userName = "";
+    // var userID = 33;
+    // var days = 30;
+    // var userRole = "";
+
+    // // Auto incre userID
+    // // if(localStorage.getItem("userID") === null){
+    // //   userID = 36 //update to id not in use to start incrementing
+    // //   localStorage.setItem("userID", 36)
+    // // }
+    // // else{
+
+    // //   let newUserId = Number(localStorage.getItem("userID"))
+    // //   newUserId+=1;
+    // //   console.log(newUserId)
+    // //   userID = newUserId
+    // //   console.log(userID)
+    // //   localStorage.setItem("userID", newUserId)
+
+    // // }
+
+    // // **Regular Functions**
+
+    // // Gets username and password values from field and checks if contained in db
+    // function getLoginValues() {
+    //   var usernameLoginField = document.getElementById("username").value;
+    //   var passwordLoginField = document.getElementById("password").value;
+
+    //   console.log(usernameLoginField);
+    //   console.log(typeof usernameLoginField);
+    //   console.log(passwordLoginField);
+
+    //   // Fix!! - Add modal open attribute if login fields arent empty
+    //   if (usernameLoginField != "" && passwordLoginField != "") {
+    //     console.log("is not null");
+    //     loginBtn.setAttribute("data-bs-toggle", "modal");
+    //     loginBtn.setAttribute("data-bs-target", "#myModal");
+    //   }
+
+    // loginBtn.addEventListener("click", getLoginValues);
+
+    // //  Show 2nd modal if "Log In" clicked
+    // function fixLoginLayout() {
+    //   remove1stModal.style.display = "none";
+    //   footer.style.display = "none";
+    //   replace1stModalWith.style.display = "block";
+    // }
+
+    // loginBtn.addEventListener("click", fixLoginLayout);
+
+    // // Fixes layout of registration page to show 2fa when register anchor clicked
+    // function fixRegisterLayout() {
+    //   remove1stModal.style.display = "block";
+    //   footer.style.display = "flex";
+    //   replace1stModalWith.style.display = "none";
+    // }
+
+    // openRegistrationModal.addEventListener("click", fixRegisterLayout);
+
+    // // Default registration page with 2nd modal removed in view
+    // replace1stModalWith.style.display = "none";
+
+    // // Load school from db into school select field
+    // async function getSchools() {
+    //   const resp = await fetch(schoolAPI);
+    //   const data = await resp.json();
+    //   console.log(data);
+    //   console.log(data[0].SCHOOL_NAME);
+
+    //   setSchools(data[0].SCHOOL_NAME);
+    // }
+
+    // getSchools();
+
+    // function setSchools(school) {
+    //   option.text = school;
+    //   option.value = school;
+    //   selectMenu.add(option);
+    // }
+
+    // // Get role
+    // function setRoles(roles) {
+    //   userRole = roles;
+    // }
+
+    // // Get registration field values
+    // function getValues() {
+    //   // Get registration fields
+
+    //   var nameInput = document.getElementById("floatingname").value;
+
+    //   // Get first name and last name
+
+    //   var splitName = nameInput.split(" ");
+    //   var firstName = splitName[0];
+    //   var lastName = splitName[1];
+
+    //   // Additional vars
+
+    //   var email = document.getElementById("floatingemail").value;
+    //   var userName = document.getElementById("floatingusername").value;
+    //   var passWord = document.getElementById("floatingpassword").value;
+    //   var cel = document.getElementById("floatingphonenumber").value;
+    //   var role = document.querySelector(
+    //     'input[name="flexRadioDefault"]:checked'
+    //   ).value;
+    //   var schoolArr = document.getElementById("schoolselection");
+    //   var schoolVal = schoolArr.options[schoolArr.selectedIndex].innerText;
+
+    //   console.log(email);
+    //   console.log(userName);
+    //   console.log(passWord);
+    //   console.log(cel);
+    //   console.log(role);
+    //   console.log(schoolVal);
+
+    //   // Object created from field input retrieved for USER
+
+    //   var fieldData = {
+    //     USER_ID: userID,
+    //     USER_NAME: userName,
+    //     PASSWORD: passWord,
+    //     DESCRIPTION: "STEMKasa " + role + " user",
+    //     EMAIL_ADDRESS: email,
+    //     PHONE_NUMBER: cel,
+    //     ENABLED_FLAG: "Y",
+    //     PERSON_ID: userID,
+    //     CREATION_DATE: "2021-08-01T04:00:00.000Z",
+    //     CREATED_BY: "ADMIN",
+    //     LAST_UPDATE_DATE: "2021-08-01T04:00:00.000Z",
+    //     LAST_UPDATED_BY: "ADMIN",
+    //   };
+
+    //   // Make post request to USER
+
+    //   fetch("http://www.onezeus.com:3000/usersdmlpost", {
+    //     method: "POST",
+    //     mode: "cors",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(fieldData),
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => console.log(data))
+    //     .catch((err) => console.log(err));
+
+    //   // Person url
+
+    //   var personURL =
+    //     "http://www.onezeus.com:3000/persondml?PERSON_ID=" +
+    //     fieldData.USER_ID +
+    //     "&FIRST_NAME=" +
+    //     firstName +
+    //     "&LAST_NAME=" +
+    //     lastName +
+    //     "&JOB_TITLE=" +
+    //     role +
+    //     "&EMAIL_ADDRESS=" +
+    //     email +
+    //     "&EFFECTIVE_START_DATE=2022-04-02T07:00:00.000Z&EFFECTIVE_END_DATE=2022-04-02T07:00:00.000Z&CREATION_DATE=" +
+    //     fieldData.CREATION_DATE +
+    //     "&CREATED_BY=" +
+    //     fieldData.CREATED_BY +
+    //     "&LAST_UPDATE_DATE=2022-08-01T04:00:00.000Z&LAST_UPDATED_BY=" +
+    //     fieldData.LAST_UPDATED_BY +
+    //     "";
+
+    //   // Make post request to PERSON
+
+    //   fetch(personURL, {
+    //     method: "GET",
+    //     mode: "cors",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => console.log(data))
+    //     .catch((err) => console.log(err));
+
+    //   // Send role to getRole
+    //   setRoles(role);
+
+    //   // Send username to getUsername
+    //   getUsername(userName);
+
+    //   // Set cookie
+    //   setCookie(userName, userID, days);
+
+    //   firstmodalcont.replaceChild(replace1stModalWith, remove1stModal);
+    //   // Show 2nd modal on register button click
+    //   replace1stModalWith.style.display = "block";
+
+    //   firstmodalcont.removeChild(footer);
+    //   console.log("removed");
+    // }
+
+    // function getUsername(username) {
+    //   if (username == undefined) {
+    //     username = -1;
+    //   }
+    //   return username;
+    // }
+
+    // // Trigger function on register button click
+    // registerNowBtn.addEventListener("click", getValues);
+
+    // **2FA Section**
+
+    // Handle international prefixes, format phone input field
+    // Uses intl-tel-input library
+
+    const phoneInputField = document.querySelector("#phone_number");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+      preferredCountries: ["us", "co", "in", "de"],
+      utilsScript:
+        "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/utils.js",
+    });
+
+    function selectedChannel() {
+      const checked = "input[name='channel']:checked";
+      return document.querySelector(checked).value;
+    }
+
+    const phoneInputDiv = document.getElementById("phone-input");
+    const emailInputDiv = document.getElementById("email-input");
+
+    function showEmailInput() {
+      phoneInputDiv.style.display = "none";
+      emailInputDiv.style.display = "block";
+    }
+
+    function showPhoneNumberInput() {
+      phoneInputDiv.style.display = "block";
+      emailInputDiv.style.display = "none";
+    }
+
+    const statusSpan = document.getElementById("status");
+    const modalStatusSpan = document.getElementById("modal-status");
+
+    function showModalStatus(message, options = { color: "gray" }) {
+      modalStatusSpan.style.color = options.color;
+      modalStatusSpan.textContent = message;
+    }
+
+    function showError(error) {
+      console.error(error);
+      showStatus(error, { color: "#a94442" });
+    }
+
+    function showStatus(message, options = { color: "gray" }) {
+      statusSpan.style.color = options.color;
+      statusSpan.textContent = message;
+    }
+
+    function clearStatus() {
+      statusSpan.textContent = "";
+      modalStatusSpan.textContent = "";
+    }
+
+    const modal = document.getElementById("otp-modal");
+    var to;
+
+    async function sendOtp(event) {
+      event.preventDefault();
+
+      const locale = document.getElementById("select-language").value;
+      const channel = selectedChannel();
+
+      let statusMessage =
+        channel == "call" ? "☎️ calling..." : "Sending verification code...";
+      showStatus(statusMessage);
+
+      to =
+        channel == "email"
+          ? document.getElementById("email").value
+          : phoneInput.getNumber();
+
+      const data = new URLSearchParams();
+      data.append("channel", channel);
+      data.append("locale", locale);
+      data.append("to", to);
+
+      try {
+        const response = await fetch("./start-verify", {
+          method: "POST",
+          body: data,
+        });
+
+        const json = await response.json();
+
+        if (response.status == 429) {
+          clearStatus();
+          modal.style.display = "block";
+          showModalStatus(
+            `You have attempted to verify '${to}' too many times. If you received a code, enter it in the form. Otherwise, please wait 10 minutes and try again.`,
+            { color: "#a94442" }
+          );
+        } else if (response.status >= 400) {
+          clearStatus();
+          showError(json.error);
+        } else {
+          modal.style.display = "block";
+          if (json.success) {
+            showStatus(`Sent verification code to ${to}`);
+          } else {
+            showError(json.error);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        showError(`Something went wrong while sending code to ${to}.`);
+      }
+    }
+
+    document
+      .getElementById("send-code")
+      .addEventListener("submit", (event) => sendOtp(event));
+
+    async function checkOtp(event) {
+      event.preventDefault();
+      let code = document.getElementById("code");
+      showModalStatus(`Checking code ${code.value}...`);
+
+      const data = new URLSearchParams();
+      data.append("to", to);
+      data.append("code", code.value);
+
+      try {
+        const response = await fetch("./check-verify", {
+          method: "POST",
+          body: data,
+        });
+
+        const json = await response.json();
+
+        if (json.success) {
+          showModalStatus("Verification success!", { color: "green" });
+
+          // Redirect to student site if student
+          if (userRole == "Student" || matchUserRole == "Student") {
+            window.location.href =
+              "http://www.onezeus.com:905/LandingPage/StemKasaHome.html";
+          }
+          // Redirect to teacher site if teacher or admin
+          else {
+            window.location.href =
+              "http://www.onezeus.com:905/STEMKASAInstructorUI/dist/instructor-profile.html";
+          }
+
+          code.value = "";
+        } else {
+          showModalStatus("Incorrect token!", { color: "#a94442" });
+          console.log("⛔️ text does not exist on page");
+          code.value = "";
+        }
+      } catch (error) {
+        console.error(error);
+        showModalStatus("Something went wrong!");
+        code.value = "";
+      }
+    }
+
+    let checkCode = document.getElementById("check-code");
+    checkCode.addEventListener("submit", (event) => checkOtp(event));
+
+    let closeButton = document.getElementById("close");
+    closeButton.addEventListener("click", () => {
+      clearStatus();
+      modal.style.display = "none";
+    });
+
+    window.onclick = function (event) {
+      switch (event.target.id) {
+        case "otp-modal":
+          modal.style.display = "none";
+          clearStatus();
+          break;
+        case "channel-email":
+          showEmailInput();
+          break;
+        case "channel-sms":
+          showPhoneNumberInput();
+          break;
+        case "channel-whatsapp":
+          showPhoneNumberInput();
+          break;
+        case "channel-call":
+          showPhoneNumberInput();
+          break;
+      }
+    };
+  </script>
+
+  <script src="locales.js"></script>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="js/main.js"></script>
+</html>

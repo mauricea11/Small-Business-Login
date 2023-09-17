@@ -1,0 +1,185 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: solid red; */
+}
+#visiblesection {
+  box-shadow: 0px 0px 3px;
+  border-radius: 7px;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+#visiblesection h2 {
+  margin-top: 10%;
+}
+
+#send-code {
+  /* border: solid blue; */
+}
+/* Image */
+img {
+  max-width: 100%;
+  width: 40vw;
+  height: 56vh;
+  /* border: solid green; */
+}
+#signinheaderdiv {
+  padding-top: 0%;
+}
+/* First paragraph */
+h3 {
+  margin-top: 0%;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+#chooseLoginPref {
+  color: #aaa6a6;
+  font-weight: 500;
+}
+/* Input part */
+input,
+select {
+  font: inherit;
+  border: 1px solid rgb(136, 145, 170);
+  border-radius: 4px;
+  padding: 0.6rem;
+}
+/* Phone input */
+#phone_number {
+  background: #edf2f5;
+}
+/* Select part */
+#select-language {
+  background: #edf2f5;
+  margin-bottom: 3%;
+}
+.passcodeBtn {
+  color: #fff;
+  background-color: #6c63ff;
+  border-color: #6c63ff;
+  height: 54px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+#otpsubmit {
+  margin-bottom: 2%;
+}
+
+.status {
+  margin-top: 1rem;
+}
+
+#codeinputcont {
+  /* border: solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8%;
+}
+
+#otp-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  width: 200px; /* Could be more or less, depending on screen size */
+  position: relative;
+}
+#check-code h2 {
+  font-size: 1rem;
+}
+
+.code {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 25px;
+  margin: 0px 5px;
+  border: 0px;
+  border-bottom: 1px solid black;
+}
+.code:focus,
+.code:focus-visible {
+  outline: 0px;
+  color: black;
+  border-color: black !important;
+}
+.card {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  display: flex;
+}
+::placeholder {
+  color: #f5f5f5;
+}
+::-moz-placeholder {
+  color: #f5f5f5;
+}
+::-webkit-input-placeholder {
+  color: #f5f5f5;
+}
+.resend-otp {
+  margin-top: 20px;
+}
+.resend-otp a {
+  cursor: not-allowed;
+  font-weight: 700;
+  color: #ef3a3a;
+}
+#timer {
+  color: #ef3a3a;
+}
+#close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+}
+
+#close:hover,
+#close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#submitbtncont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* All other cases */

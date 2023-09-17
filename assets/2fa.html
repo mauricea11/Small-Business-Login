@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://twilio-labs.github.io/function-templates/static/v1/ce-paste-theme.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/css/intlTelInput.min.css"
+      integrity="sha256-xpVuhxDPR39wFEQDha4W7kuMx+z9Av3dTS8MbH/RWEU="
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/intlTelInput.min.js"
+      integrity="sha256-uPbemOnf3P4eaeLHebLwPC71YRbu3WNBvO4ibYeBnGs="
+      crossorigin="anonymous"
+    ></script>
+    <script src="locales.js" defer></script>
+    <script src="http://www.onezeus.com:905/STEMKASAInstructorUI/dist/assets/js/stemkasa_common.js"></script>
+    <link rel="stylesheet" href="2fa.css" />
+  </head>
+  <body>
+    <!-- 2nd modal for 2fa -->
+    <div class="modal-body secondmodal" id="secondmodalbody">
+      <main>
+        <div class="content">
+          <section id="visiblesection">
+            <h2>Verify Your Account First With a One-Time Password</h2>
+            <form id="send-code">
+              <p>Choose how you'd like us to contact you:</p>
+              <div>
+                <input
+                  type="radio"
+                  name="channel"
+                  id="channel-sms"
+                  value="sms"
+                  checked
+                />
+                <label for="channel-sms">SMS</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="channel"
+                  id="channel-whatsapp"
+                  value="whatsapp"
+                />
+                <label for="channel-whatsapp">WhatsApp</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="channel"
+                  id="channel-call"
+                  value="call"
+                />
+                <label for="channel-call">Call</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="channel"
+                  id="channel-email"
+                  value="email"
+                />
+                <label for="channel-email">Email</label>
+              </div>
+              <div id="phone-input">
+                <p>Enter your phone number:</p>
+                <input type="tel" id="phone_number" />
+              </div>
+              <div id="email-input" style="display: none">
+                <p>Enter your email:</p>
+                <input type="email" id="email" />
+              </div>
+              <p>Select your preferred language:</p>
+              <select id="select-language"></select>
+              <input
+                type="submit"
+                value="Get a one-time passcode"
+                id="otpsubmit"
+              />
+              <span id="status" class="status"></span>
+            </form>
+          </section>
+          <section>
+            <div id="otp-modal">
+              <div class="modal-content">
+                <!-- <span id="close">&times;</span> -->
+                <form id="check-code">
+                  <h2>Got it, please enter the code below.</h2>
+                  <div id="codeinputcont">
+                    <!-- <input
+                      type="text"
+                      id="code"
+                      placeholder="123456"
+                      required
+                    /> -->
+
+                    <div class="card">
+                      <input
+                        autocomplete="off"
+                        class="code"
+                        type="text"
+                        onclick="this.value = ''"
+                        oninput="onlyNumbers(this)"
+                        onkeyup="nextInput(1)"
+                        maxlength="1"
+                        name="code[]"
+                        placeholder="..."
+                        id="codedigit1"
+                      />
+                      <input
+                        autocomplete="off"
+                        class="code"
+                        type="text"
+                        onclick="this.value = ''"
+                        oninput="onlyNumbers(this)"
+                        onkeyup="nextInput(2)"
+                        maxlength="1"
+                        name="code[]"
+                        placeholder="..."
+                        id="codedigit2"
+                      />
+                      <input
+                        autocomplete="off"
+                        class="code"
+                        type="text"
+                        onclick="this.value = ''"
+                        oninput="onlyNumbers(this)"
+                        onkeyup="nextInput(3)"
+                        maxlength="1"
+                        name="code[]"
+                        placeholder="..."
+                        id="codedigit3"
+                      />
+                      <input
+                        autocomplete="off"
+                        class="code"
+                        type="text"
+                        onclick="this.value = ''"
+                        oninput="onlyNumbers(this)"
+                        onkeyup="nextInput(4)"
+                        maxlength="1"
+                        name="code[]"
+                        placeholder="..."
+                        id="codedigit4"
+                      />
+                    </div>
+                  </div>
+                  <div id="submitbtncont">
+                    <input type="submit" value="Verify" />
+                    <h2>Didnt get a code?</h2>
+                  </div>
+                  <span id="modal-status" class="status"></span>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Handle international prefixes, format phone input field
+      // Uses intl-tel-input library
+      const phoneInputField = document.querySelector("#phone_number");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+        preferredCountries: ["us", "co", "in", "de"],
+        utilsScript:
+          "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.13/build/js/utils.js",
+      });
+
+      function selectedChannel() {
+        const checked = "input[name='channel']:checked";
+        return document.querySelector(checked).value;
+      }
+
+      const phoneInputDiv = document.getElementById("phone-input");
+      const emailInputDiv = document.getElementById("email-input");
+
+      function showEmailInput() {
+        phoneInputDiv.style.display = "none";
+        emailInputDiv.style.display = "block";
+      }
+
+      function showPhoneNumberInput() {
+        phoneInputDiv.style.display = "block";
+        emailInputDiv.style.display = "none";
+      }
+
+      const statusSpan = document.getElementById("status");
+      const modalStatusSpan = document.getElementById("modal-status");
+
+      function showModalStatus(message, options = { color: "gray" }) {
+        modalStatusSpan.style.color = options.color;
+        modalStatusSpan.textContent = message;
+      }
+
+      function showError(error) {
+        console.error(error);
+        showStatus(error, { color: "#a94442" });
+      }
+
+      function showStatus(message, options = { color: "gray" }) {
+        statusSpan.style.color = options.color;
+        statusSpan.textContent = message;
+      }
+
+      function clearStatus() {
+        statusSpan.textContent = "";
+        modalStatusSpan.textContent = "";
+      }
+
+      const modal = document.getElementById("otp-modal");
+      var to;
+
+      async function sendOtp(event) {
+        event.preventDefault();
+
+        const locale = document.getElementById("select-language").value;
+        const channel = selectedChannel();
+
+        let statusMessage =
+          channel == "call" ? "☎️ calling..." : "Sending verification code...";
+        showStatus(statusMessage);
+
+        to =
+          channel == "email"
+            ? document.getElementById("email").value
+            : phoneInput.getNumber();
+
+        const data = new URLSearchParams();
+        data.append("channel", channel);
+        data.append("locale", locale);
+        data.append("to", to);
+
+        try {
+          const response = await fetch("./start-verify", {
+            method: "POST",
+            body: data,
+          });
+
+          const json = await response.json();
+
+          if (response.status == 429) {
+            clearStatus();
+            modal.style.display = "block";
+            showModalStatus(
+              `You have attempted to verify '${to}' too many times. If you received a code, enter it in the form. Otherwise, please wait 10 minutes and try again.`,
+              { color: "#a94442" }
+            );
+          } else if (response.status >= 400) {
+            clearStatus();
+            showError(json.error);
+          } else {
+            modal.style.display = "block";
+            if (json.success) {
+              showStatus(`Sent verification code to ${to}`);
+            } else {
+              showError(json.error);
+            }
+          }
+        } catch (error) {
+          console.error(error);
+          showError(`Something went wrong while sending code to ${to}.`);
+        }
+      }
+
+      document
+        .getElementById("send-code")
+        .addEventListener("submit", (event) => sendOtp(event));
+
+      async function checkOtp(event) {
+        event.preventDefault();
+        // let code = document.getElementById("code");
+        let digit1 = document.getElementById("codedigit1").value;
+        let digit2 = document.getElementById("codedigit2").value;
+        let digit3 = document.getElementById("codedigit3").value;
+        let digit4 = document.getElementById("codedigit4").value;
+        let code = digit1 + digit2 + digit3 + digit4;
+
+        console.log(code);
+
+        // showModalStatus(`Checking code ${code.value}...`);
+        showModalStatus(`Checking code ${code}...`);
+
+        const data = new URLSearchParams();
+        data.append("to", to);
+        // data.append("code", code.value);
+        data.append("code", code);
+
+        try {
+          const response = await fetch("./check-verify", {
+            method: "POST",
+            body: data,
+          });
+
+          const json = await response.json();
+
+          if (json.success) {
+            showModalStatus("Verification success!", { color: "green" });
+            code.value = "";
+
+            let userID = 1;
+
+            let userURL =
+              "http://www.onezeus.com:3000/usersdml?USER_NAME=" +
+              localStorage.getItem("username") +
+              "&PASSWORD=" +
+              localStorage.getItem("password") +
+              "&PERSON_ID=1&DESCRIPTION=dm,dddknd&EMAIL_ADDRESS=" +
+              localStorage.getItem("email") +
+              "&PHONE_NUMBER=" +
+              localStorage.getItem("phone") +
+              "&ENABLED_FLAG=Y&LAST_UPDATED_BY=ADMIN&LAST_UPDATE_DATE=2021-08-01T04:00:00.000Z&CREATED_BY=ADMIN&CREATION_DATE=2021-08-01T04:00:00.000Z&USER_ID=1";
+
+            // Post to USERS
+
+            // var fieldData = {
+            //   // USER_ID: 1,
+            //   USER_NAME: localStorage.getItem("username"),
+            //   PASSWORD: localStorage.getItem("password"),
+            //   DESCRIPTION: "STEMKasa " + localStorage.getItem("role") + " user",
+            //   EMAIL_ADDRESS: localStorage.getItem("email"),
+            //   PHONE_NUMBER: localStorage.getItem("phone"),
+            //   ENABLED_FLAG: "Y",
+            //   PERSON_ID: 1,
+            //   CREATION_DATE: "2021-08-01T04:00:00.000Z",
+            //   CREATED_BY: "ADMIN",
+            //   LAST_UPDATE_DATE: "2021-08-01T04:00:00.000Z",
+            //   LAST_UPDATED_BY: "ADMIN",
+            // };
+
+            // Make post request to USER
+
+            fetch(userURL, {
+              method: "GET",
+              mode: "cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data))
+              .catch((err) => console.log(err));
+
+            // Person url
+
+            if (localStorage.getItem("login-username") !== null) {
+            } else {
+              let splitName = localStorage.getItem("name").split(" ");
+              let firstName = splitName[0];
+              let lastName = splitName[1];
+
+              var personURL =
+                "http://www.onezeus.com:3000/persondml?PERSON_ID=" +
+                userID +
+                "&FIRST_NAME=" +
+                firstName +
+                "&LAST_NAME=" +
+                lastName +
+                "&JOB_TITLE=" +
+                localStorage.getItem("role") +
+                "&EMAIL_ADDRESS=" +
+                localStorage.getItem("email") +
+                "&EFFECTIVE_START_DATE=2022-04-02T07:00:00.000Z&EFFECTIVE_END_DATE=2022-04-02T07:00:00.000Z&CREATION_DATE=2021-08-01T04:00:00.000Z&CREATED_BY=ADMIN&LAST_UPDATE_DATE=2022-08-01T04:00:00.000Z&LAST_UPDATED_BY=ADMIN";
+
+              // Make post request to PERSON
+
+              fetch(personURL, {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((err) => console.log(err));
+            }
+            // Check if someone logged in and was transferred to page
+            if (
+              localStorage.getItem("login-username") != null &&
+              localStorage.getItem("login-id") != null &&
+              localStorage.getItem("login-role") != null
+            ) {
+              setCookie(
+                localStorage.getItem("login-username"),
+                localStorage.getItem("login-id"),
+                30
+              );
+              localStorage.setItem(
+                "username",
+                localStorage.getItem("login-username")
+              );
+              localStorage.setItem("role", localStorage.getItem("login-role"));
+            } else {
+              setCookie(localStorage.getItem("username"), userID, 30);
+            }
+
+            // Redirect
+
+            if (localStorage.getItem("role") === "Student") {
+              window.location.href =
+                "http://www.onezeus.com:905/LandingPage/StemKasaHome.html";
+            } else {
+              window.location.href =
+                "http://www.onezeus.com:905/STEMKASAInstructorUI/dist/instructor-profile.html";
+            }
+          } else {
+            showModalStatus("Incorrect pin", { color: "#a94442" });
+            code.value = "";
+          }
+        } catch (error) {
+          console.error(error);
+          showModalStatus("Something went wrong!");
+          code.value = "";
+        }
+      }
+
+      let checkCode = document.getElementById("check-code");
+      checkCode.addEventListener("submit", (event) => checkOtp(event));
+
+      //   let closeButton = document.getElementById("close");
+      //   closeButton.addEventListener("click", () => {
+      //     clearStatus();
+      //     modal.style.display = "none";
+      //   });
+
+      window.onclick = function (event) {
+        switch (event.target.id) {
+          case "otp-modal":
+            modal.style.display = "none";
+            clearStatus();
+            break;
+          case "channel-email":
+            showEmailInput();
+            break;
+          case "channel-sms":
+            showPhoneNumberInput();
+            break;
+          case "channel-whatsapp":
+            showPhoneNumberInput();
+            break;
+          case "channel-call":
+            showPhoneNumberInput();
+            break;
+        }
+      };
+    </script>
+    <script src="2fa.js"></script>
+  </body>
+</html>
